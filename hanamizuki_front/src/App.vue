@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <li><a href="https://twitter.com/vuejs" target="_blank" class="btn btn-dark">Twitter</a></li>
     </div>
     <router-view/>
   </div>
