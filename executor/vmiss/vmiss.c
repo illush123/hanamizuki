@@ -127,15 +127,14 @@ int recv_all(int fd, void *ptr, int len) {
 }
 
 
-int compare(int fd, VM* serv_vm){
+int compare(int fd, VM* serv_vm, char* opcode){
     VM recv_vm = {0};
     recv_all(fd, &recv_vm, sizeof(recv_vm.mutable));
     char sendstr[0x100000] = {};
     
     //json
-    char sendopcode[4] = "aaa";
     strcat(sendstr,"{");
-    instruction_json(sendstr,  sendopcode);
+    instruction_json(sendstr, opcode);
     strcat(sendstr,",\"resource\":{");
     //json
     
@@ -153,9 +152,9 @@ int compare(int fd, VM* serv_vm){
         
         fprintf(stderr,"%s", sendstr);
         
-        unsigned long user_id = 2;
+        unsigned long user_id = 0;//sample
         char filename[32];
-        sprintf(filename,"%08lx.json",user_id);
+        sprintf(filename,"out/%08lx.json",user_id);
         FILE *fp = fopen(filename,"w");
         fwrite(sendstr, sizeof(char),strlen(sendstr),fp);
         fclose(fp);
@@ -195,12 +194,10 @@ int wait_client(){
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(8888);
     
-    //バインド
     if (bind(serv_sock, (struct sockaddr *) &serv_addr, sizeof serv_addr) == -1) {
         perror("bind");
         exit(1);
     }
-    //リッスン
     if (listen(serv_sock, 5) == -1) {
         perror("listen");
         exit(1);

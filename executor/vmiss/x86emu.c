@@ -4,6 +4,7 @@
 #include "interpreter.h"
 #include "vmiss.h"
 
+
 int run(int argc, char *argv[],char *env){
     unsigned char* mem = create_data_from_file(argv[0]);
     tsize = mem[8] + (mem[9] << 8) + (mem[10] << 16) + (mem[11] << 24);
@@ -14,10 +15,10 @@ int run(int argc, char *argv[],char *env){
     destroy_data(mem);
     set_stack(argc, argv, env);
     fprintf(stderr, " AX   BX   CX   DX   SP   BP   SI   DI  FLAGS IP\n");
-    
+    char opcode[16];
     int clnt_sock = wait_client();
     while(IP <= tsize){
-        compare(clnt_sock, &vm);
+        compare(clnt_sock, &vm, opcode);
         Operation    op = {};
         op.r_m = op.reg = op.w = op.d = -1;
         strcpy(op.opcode,"error");
@@ -1227,6 +1228,7 @@ int run(int argc, char *argv[],char *env){
             op.asem[2] = op.asem[3];
         }
         exec(&op);
+        strcpy(opcode, op.opcode);
         fprintf(stderr, "\n");
     }
     fprintf(stderr, "\ntsize<IP ! tsize=%04x, ip = %04x\n",tsize,IP);

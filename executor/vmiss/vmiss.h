@@ -5,6 +5,6 @@
 #include "interpreter.h"
 
 int wait_client(void);
-int compare(int fd, VM* vm);
+int compare(int fd, VM* vm, char* opcode);
 
 #endif /* vmiss_h */
