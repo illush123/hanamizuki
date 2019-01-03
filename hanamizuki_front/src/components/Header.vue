@@ -20,7 +20,7 @@ export default class HelloWorld extends Vue {
   @Prop({ default: 'dummy message' }) private messageProp!: string;
 
   // data
-  lessonTitle = this.messageProp;
+  private lessonTitle: string = this.messageProp;
 }
 </script>
 
