@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Header></Header>
-    <button type="button" class="btn btn-dark">Dark</button>
+    <Header messageProp="this is propmessage"></Header>
   </div>
 </template>
 

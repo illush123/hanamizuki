@@ -3,7 +3,6 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <li><a href="https://twitter.com/vuejs" target="_blank" class="btn btn-dark">Twitter</a></li>
     </div>
     <router-view/>
   </div>
@@ -16,6 +15,13 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  // 中央寄せ
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 #nav {
   padding: 30px;
