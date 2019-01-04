@@ -1,12 +1,24 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="container">
+    <div id="app" class="pr-1 pl-1 mr-auto ml-auto">
+      <div id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </div>
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
+
+<script lang="ts">
+import  { Vue } from 'vue-property-decorator';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+export default class App extends Vue {
+
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -15,13 +27,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
-  // 中央寄せ
-  margin-right: auto;
-  margin-left: auto;
   max-width: 1200px;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 #nav {
   padding: 30px;
