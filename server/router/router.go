@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	vmiss "github.com/illush123/hanamizuki/server/vmiss/handler"
+	"github.com/illush123/hanamizuki/server/api/vmiss"
 )
 
 func Register(e *gin.Engine) {

@@ -1,0 +1,18 @@
+syntax="proto3";
+
+package proto;
+
+service VmissRPC {
+    rpc StoreFiles(VmissRequest) returns(Empty);
+}
+
+message Empty {}
+
+message CodeFile {
+    string meta = 1;
+    bytes body = 2;
+}
+
+message VmissRequest {
+    repeated CodeFile files = 1;
+}
