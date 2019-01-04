@@ -1,21 +1,43 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-    <button type="button" class="btn btn-dark">Dark</button>
+    <Header messageProp="this is propmessage"></Header>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <BinarySpace></BinarySpace>
+        </div>
+        <div class="col-8">
+          <EditorSpace></EditorSpace>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Header from '@/components/Header.vue';
+import EditorSpace from '@/components/EditorSpace.vue';
+import BinarySpace from '@/components/BinarySpace.vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component({
   components: {
-    HelloWorld,
+    // HelloWorld,
+    Header,
+    BinarySpace,
+    EditorSpace,
   },
 })
 export default class Home extends Vue {}
 </script>
+
+<style scoped lang="scss">
+
+  .container {
+    padding-top: 34px;
+  }
+
+</style>
