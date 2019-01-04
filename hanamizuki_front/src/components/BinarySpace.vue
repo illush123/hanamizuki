@@ -30,14 +30,6 @@
           </ul>
         </div>
         <div class="last pb-5">
-          <div class="binary-space-lesson-required-box pr-3 pl-3">
-            <div class="required-title pt-4 pb-2 pl-5">要件定義</div>
-            <ul class="required-descriptions">
-              <li v-for="element in lessonDescriptionElements" class="required-description">
-                {{element}}
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
@@ -80,8 +72,8 @@
 
     .binary-space-lesson-title {
       width: 100%;
-      background-color: cyan;
-      border: solid 1px cyan;
+      background-color: #C7ECEE;
+      border: solid 1px #C7ECEE;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
       font-weight: 600;
