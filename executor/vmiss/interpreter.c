@@ -176,7 +176,9 @@ void set_stack(int argc, char *argv[], char *env) {
     unsigned short argaddrs[10];
     len = env_len;
     len++;
-    
+    fd_tbl[0] = 0;//stdin
+    fd_tbl[1] = 1;//stdout
+    fd_tbl[2] = 2;//stderr
     for (i = 0; i < argc; ++i) {
         len += strlen(argv[i]);
         len++;
@@ -793,7 +795,9 @@ int minix_syscall() {
              fprintf(stderr, "\n<wait()> => %d, 0x%x", currentpid + 1, currentpid - ID);
              }
              */
-            exit(status);
+            
+            //exit(status);
+            exit(0);
             break;
             /*
              case 2://fork
@@ -817,7 +821,12 @@ int minix_syscall() {
             }else{
               fprintf(stderr, "\n<read(%d, 0x%04x, %d)",fd, buf, nbyte);
               status = read(fd, &dmem[buf], nbyte);
-            } fprintf(stderr, " => %d>", status);
+            } 
+            if(status == -1){
+              perror("read");
+              exit(1);
+            } 
+            fprintf(stderr, " => %d>", status);
         }
             break;
         case 4://write命令
@@ -830,6 +839,10 @@ int minix_syscall() {
             int buf = read_data(st);
             fprintf(stderr, "\n<write(%d, 0x%04x, %d)", fd_tbl[fd], buf, nbyte);
             status = write(fd_tbl[fd], &dmem[buf], nbyte);
+            if(status == -1){
+              perror("write");
+              exit(1);
+            } 
             fprintf(stderr, " => %d>", status);
             break;
         case 5: {//open
@@ -847,6 +860,10 @@ int minix_syscall() {
                 st.index = BX + 8;
                 (len <= 14) ? (addr = BX + 10) : (addr = read_data(st));
                 status = open(make_path((char *) &dmem[addr]), flag);
+                if(status == -1){
+                  perror("open");
+                  exit(1);
+                }
                 fprintf(stderr, "\n<open(\"%s\", %d)", &dmem[addr], flag);
                 fprintf(stderr, " => %d>", status);
             }
@@ -861,7 +878,11 @@ int minix_syscall() {
               fprintf(stderr, "\n<close(%d)", fd);
               status = close(fd);
             }
-              fprintf(stderr, " => %d>", status);
+            if(status == -1){
+              perror("close");
+              exit(1);
+            }
+            fprintf(stderr, " => %d>", status);
             break;
         }
             /*
@@ -969,6 +990,10 @@ int minix_syscall() {
             st.index = BX + 6;
             int whence = read_data(st);
             status = lseek(fd_tbl[fd], offset, whence);
+            if(status == -1){
+              perror("lseek");
+              exit(1);
+            }
             fprintf(stderr, "\n<lseek(%d, %d, %d)", fd_tbl[fd], offset, whence);
             fprintf(stderr, " => %d>", status);
             st.type = MEM_16BIT;
