@@ -9,5 +9,5 @@ func main() {
 	api := gin.Default()
 	router.Register(api)
 
-	api.Run(":8080")
+	api.Run(":8888")
 }
