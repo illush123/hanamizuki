@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="binary-space-wrapper">
+      <div class="binary-space-body">
         <div class="lesson-description">{{lessonDescription}}</div>
         <div class="binary-space-lesson-required-box pr-3 pl-3">
           <div class="required-title pt-4 pb-2 pl-5">要件定義</div>
@@ -85,16 +85,19 @@
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
       font-weight: 600;
+      box-shadow: 2px 2px 2px 2px #888888;
     }
 
-    .binary-space-wrapper {
+    .binary-space-body {
       width: 100%;
+      height: 780px;
       padding-left: 25px;
       padding-right: 25px;
       background-color: #DFF9FB;
       border: solid 1px #DFF9FB;
       border-bottom-left-radius: 1rem;
       border-bottom-right-radius: 1rem;
+      box-shadow: 2px 2px 2px 2px #888888;
 
       .lesson-description {
         font-size: 1.2rem;
