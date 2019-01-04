@@ -1,21 +1,14 @@
-package routes
+package handler
 
 import (
 	"fmt"
 	"net/http"
 	"path/filepath"
+
 	"github.com/gin-gonic/gin"
 )
 
-func Home(ctx *gin.Context) {
-    ctx.HTML(http.StatusOK, "index.html", gin.H{})
-}
-
-func Aaa(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "aaa.html", gin.H{})
-}
-
-func TestForm(c *gin.Context) {
+func StoreFiles(c *gin.Context) {
 	// Source
 	file, err := c.FormFile("file")
 	if err != nil {
