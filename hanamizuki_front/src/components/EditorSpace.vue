@@ -5,9 +5,14 @@
           <div class="editor-space-title pt-1 pb-1">VM&nbspCode</div>
         </div>
         <div class="editor-space-body pl-4 pr-4">
-          <div class="editor-space-tools pt-5 pb-2">
-            <b-button class="folder-button btn btn-default pull-right">&nbsp&nbsp&nbsp&nbspフォルダを開く</b-button>
-          </div>
+          <b-row>
+            <b-col cols="9"></b-col>
+            <b-col cols="3">
+              <div class="editor-space-tools pt-3 pb-2">
+                <b-button class="folder-button">&nbsp&nbsp&nbsp&nbspフォルダを開く</b-button>
+              </div>
+            </b-col>
+          </b-row>
           <div class="editor pt-3">
             <!-- editor? -->
           </div>
