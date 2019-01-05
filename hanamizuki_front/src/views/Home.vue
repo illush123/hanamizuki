@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-// import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Header from '@/components/Header.vue';
 import EditorSpace from '@/components/EditorSpace.vue';
 import QuestionSpace from '@/components/QuestionSpace.vue';
