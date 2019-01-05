@@ -12,12 +12,12 @@
           </div>
         </div>
       </div>
-      <div class="binary-space-body">
-        <div class="lesson-description">{{lessonDescription}}</div>
-        <div class="binary-space-lesson-required-box pr-3 pl-3">
+      <div class="binary-space-body pl-4 pr-4">
+        <div class="lesson-description pt-4 pb-4">{{lessonDescription}}</div>
+        <div class="binary-space-lesson-required-box pr-3 pl-3 pb-4">
           <div class="required-title pt-4 pb-2 pl-5">要件定義</div>
-          <ul class="required-descriptions">
-            <li v-for="element in lessonDescriptionElements" class="required-description">
+          <ul class="required-descriptions pt-4">
+            <li v-for="element in lessonDescriptionElements" class="required-description pb-1">
               {{element}}
             </li>
           </ul>
@@ -84,8 +84,6 @@
     .binary-space-body {
       width: 100%;
       height: 780px;
-      padding-left: 25px;
-      padding-right: 25px;
       background-color: $question-body;
       border: solid 1px $question-body;
       border-bottom-left-radius: 1rem;
@@ -95,28 +93,20 @@
       .lesson-description {
         font-size: 1.2rem;
         text-align: left;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
       }
 
       .binary-space-lesson-required-box {
-        border: solid 1px $h-block;
+        border: solid 1px $h-black;
         background-color: white;
         border-radius: 0.1rem;
         text-align: left;
-        padding-bottom: 2.5rem;
 
         .required-title {
           border-bottom: solid 1px darkgray;
         }
 
         .required-descriptions {
-          padding-top: 1.8rem;
           font-size: 0.8rem;
-
-          .required-description {
-            padding-bottom: 0.1rem;
-          }
         }
       }
     }

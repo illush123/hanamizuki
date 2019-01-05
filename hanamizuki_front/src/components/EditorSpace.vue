@@ -61,14 +61,14 @@ export default class EditorSpace extends Vue {
         .folder-button {
           font-size: 0.3rem;
           background-color: $editor-button;
-          color: black;
+          color: $h-black;
           border-color: $editor-button;
         }
       }
 
       .editor {
         height: 580px;
-        border: solid 1px black;
+        border: solid 1px $h-black;
         background-color: white;
       }
 
