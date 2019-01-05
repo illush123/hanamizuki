@@ -61,6 +61,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../assets/style/_variables";
   // 1rem = 16px
 
   ul {
@@ -72,12 +73,12 @@
 
     .binary-space-lesson-title {
       width: 100%;
-      background-color: #C7ECEE;
-      border: solid 1px #C7ECEE;
+      background-color: $question-header;
+      border: solid 1px $question-header;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
       font-weight: 600;
-      box-shadow: 2px 2px 2px 2px #888888;
+      box-shadow: 2px 2px 2px 2px $box-shadow;
     }
 
     .binary-space-body {
@@ -85,11 +86,11 @@
       height: 780px;
       padding-left: 25px;
       padding-right: 25px;
-      background-color: #DFF9FB;
-      border: solid 1px #DFF9FB;
+      background-color: $question-body;
+      border: solid 1px $question-body;
       border-bottom-left-radius: 1rem;
       border-bottom-right-radius: 1rem;
-      box-shadow: 2px 2px 2px 2px #888888;
+      box-shadow: 2px 2px 2px 2px $box-shadow;
 
       .lesson-description {
         font-size: 1.2rem;
@@ -99,7 +100,7 @@
       }
 
       .binary-space-lesson-required-box {
-        border: solid 1px black;
+        border: solid 1px $h-block;
         background-color: white;
         border-radius: 0.1rem;
         text-align: left;

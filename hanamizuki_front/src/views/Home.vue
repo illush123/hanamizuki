@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-4">
-          <BinarySpace></BinarySpace>
+          <QuestionSpace></QuestionSpace>
         </div>
         <div class="col-8">
           <EditorSpace></EditorSpace>
@@ -24,7 +24,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component({
   components: {
-    // HelloWorld,
     Header,
     QuestionSpace,
     EditorSpace,
