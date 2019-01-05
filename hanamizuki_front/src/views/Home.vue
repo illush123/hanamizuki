@@ -1,16 +1,16 @@
 <template>
   <div class="home">
     <Header></Header>
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
+    <b-container>
+      <b-row>
+        <b-col cols="4">
           <QuestionSpace></QuestionSpace>
-        </div>
-        <div class="col-8">
+        </b-col>
+        <b-col cols="8">
           <EditorSpace></EditorSpace>
-        </div>
-      </div>
-    </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

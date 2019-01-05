@@ -1,6 +1,6 @@
 <template>
     <div class="editor-space-container">
-      <div class="container">
+      <b-container>
         <div class="editor-space-header">
           <div class="editor-space-title pt-1 pb-1">VM&nbspCode</div>
         </div>
@@ -15,7 +15,7 @@
             <b-button class="submit-button" size="lg">検証スタート</b-button>
           </div>
         </div>
-      </div>
+      </b-container>
     </div>
 </template>
 

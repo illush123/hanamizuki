@@ -1,16 +1,16 @@
 <template>
   <div class="binary-space-container">
-    <div class="container">
+    <b-container>
       <div class="binary-space-lesson-title">
-        <div class="row">
-          <div class="col-5 pt-1 pb-1 pl-5">
+        <b-row>
+          <b-col cols="5" class="pt-1 pb-1 pl-5">
             <span class="lesson-const">Lesson</span>
             <span class="lesson-number">&nbsp&nbsp{{lessonNumber}}</span>
-          </div>
-          <div class="col-7 pt-1 pb-1">
+          </b-col>
+          <b-col cols="7" class="pt-1 pb-1">
             <span class="lesson-title">{{lessonTitle}}</span>
-          </div>
-        </div>
+          </b-col>
+        </b-row>
       </div>
       <div class="binary-space-body pl-4 pr-4">
         <div class="lesson-description pt-4 pb-4">{{lessonDescription}}</div>
@@ -29,10 +29,9 @@
             </li>
           </ul>
         </div>
-        <div class="last pb-5">
-        </div>
+        <div class="last pb-5"></div>
       </div>
-    </div>
+    </b-container>
   </div>
 </template>
 
