@@ -38,8 +38,8 @@ export default class EditorSpace extends Vue {
 
     .editor-space-header {
       width: 100%;
-      background-color: $editor-back;
-      border: solid 1px $editor-back;
+      background-color: $editor-header;
+      border: solid 1px $editor-header;
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
       font-weight: 600;
@@ -54,7 +54,7 @@ export default class EditorSpace extends Vue {
       border: solid 1px $editor-back;
       border-bottom-left-radius: 1rem;
       border-bottom-right-radius: 1rem;
-      box-shadow: 2px 2px 2px 2px ;
+      box-shadow: 2px 2px 2px 2px $box-shadow;
 
       .editor-space-tools {
 
