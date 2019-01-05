@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Header messageProp="this is propmessage"></Header>
+    <Header></Header>
     <div class="container">
       <div class="row">
         <div class="col-4">
@@ -19,7 +19,7 @@ import { Component, Vue } from 'vue-property-decorator';
 // import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Header from '@/components/Header.vue';
 import EditorSpace from '@/components/EditorSpace.vue';
-import BinarySpace from '@/components/BinarySpace.vue';
+import QuestionSpace from '@/components/QuestionSpace.vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -27,7 +27,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
   components: {
     // HelloWorld,
     Header,
-    BinarySpace,
+    QuestionSpace,
     EditorSpace,
   },
 })

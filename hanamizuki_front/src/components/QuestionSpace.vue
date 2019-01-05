@@ -42,7 +42,7 @@
   import 'bootstrap-vue/dist/bootstrap-vue.css';
 
   @Component
-  export default class HelloWorld extends Vue {
+  export default class QuestionSpace extends Vue {
     @Prop({default: '01'}) private lessonNum!: string;
     @Prop({default: '四則演算'}) private title!: string;
     @Prop({default: '四則演算を実装しよう'}) private description!: string;

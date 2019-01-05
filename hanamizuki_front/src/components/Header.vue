@@ -16,11 +16,9 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class HelloWorld extends Vue {
-  @Prop({ default: 'dummy message' }) private messageProp!: string;
-
+export default class Header extends Vue {
   // data
-  private lessonTitle: string = this.messageProp;
+  private lessonTitle: string = 'これはダミーメッセージです';
 }
 </script>
 
