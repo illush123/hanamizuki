@@ -57,72 +57,30 @@ func dbInit(db *gorm.DB) {
 	db.AutoMigrate(&Resource{})
 	//insertTestData(db)
 }
-func insertTestData(db *gorm.DB) {
-	db.Create(&Result{
-		UID:         30000,
-		Instruction: "test_inst1",
-		Resources: []Resource{
-			{
-				Name:    "memory[ffff]",
-				Vmiss:   58,
-				Student: 0,
-			},
-			{
-				Name:    "memory[ff1f]",
-				Vmiss:   59,
-				Student: 1,
-			},
-			{
-				Name:    "memory[ff00]",
-				Vmiss:   60,
-				Student: 2,
-			},
-		}})
-	db.Create(&Result{
-		UID:         30010,
-		Instruction: "test_inst2",
-		Resources: []Resource{
-			{
-				Name:    "memory[0000]",
-				Vmiss:   61,
-				Student: 3,
-			},
-			{
-				Name:    "memory[0001]",
-				Vmiss:   62,
-				Student: 4,
-			},
-		}})
-	db.Create(&Result{
-		UID:         30020,
-		Instruction: "test_inst3",
-		Resources: []Resource{
-			{
-				Name:    "memory[4441]",
-				Vmiss:   63,
-				Student: 5,
-			},
-		}})
-}
 
-func saveResult(db *gorm.DB, userid string) {
+func saveResult(db *gorm.DB, userid string) error {
 	result := jsonDecode("out/" + userid + ".json")
 	fmt.Println("id : ", result.UID)
 	fmt.Println("instruction : ", result.Instruction)
 	for _, r := range result.Resources {
 		fmt.Println("name : ", r.Name, ",vmiss : ", r.Vmiss, ",student : ", r.Student)
 	}
-	id, _ := strconv.Atoi(userid)
-	db.Create(&Result{
+	id, err := strconv.Atoi(userid)
+	if err != nil {
+		return err
+	}
+	if err := db.Create(&Result{
 		UID:         id,
 		Instruction: result.Instruction,
 		Resources:   result.Resources,
-	})
+	}).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
-func SaveMysql(userid string) {
+func SaveMysql(userid string) error {
 	db := gormConnect()
 	defer db.Close()
-	dbInit(db)
-	saveResult(db, userid)
+	return saveResult(db, userid)
 }
