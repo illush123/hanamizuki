@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/illush123/hanamizuki/proto"
+	"github.com/illush123/hanamizuki/server/internal/executor"
 )
 
 func StoreFiles(c *gin.Context) {
@@ -25,8 +26,18 @@ func StoreFiles(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, err)
 		return
 	}
+	buildDir := c.Query("build_dir")
+	if buildDir == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Not found build dir"})
+		return
+	}
+	req.BuildDir = buildDir
 
-	// TODO: send request to executor by gRPC
+	_, err = executor.StoreFiles(req)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
 	c.JSON(http.StatusOK, req)
 }
 
@@ -45,8 +56,8 @@ func buildRequest(f []*multipart.FileHeader) (*proto.VmissRequest, error) {
 			return nil, err
 		}
 		codeFile := &proto.CodeFile{
-			Meta: file.Filename,
-			Body: b,
+			FileName: file.Filename,
+			Body:     b,
 		}
 		req.Files = append(req.Files, codeFile)
 	}
