@@ -1,4 +1,6 @@
 server/vendor
+.*
+executor/exec_server/exec_server
 .env
 **/*.env
 **/*.env.local

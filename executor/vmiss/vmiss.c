@@ -15,47 +15,47 @@
 int compare_vm(char* sendstr,VM* student,VM* serv){
     int equals = 0;
     if (student->mutable.gregs.r16[0] != serv->mutable.gregs.r16[0]) {
-        reg_json(sendstr, "AX",serv->mutable.gregs.r16[0],student->mutable.gregs.r16[0]);
+        resource_json(sendstr, "AX",serv->mutable.gregs.r16[0],student->mutable.gregs.r16[0]);
         fprintf(stderr, "AXが異なります");
         equals = 1;
     }
     if (student->mutable.gregs.r16[1] != serv->mutable.gregs.r16[1]) {
-        reg_json(sendstr, "BX",serv->mutable.gregs.r16[1],student->mutable.gregs.r16[1]);
+        resource_json(sendstr, "BX",serv->mutable.gregs.r16[1],student->mutable.gregs.r16[1]);
         fprintf(stderr, "BXが異なります");
         equals = 1;
     }
     if (student->mutable.gregs.r16[2] != serv->mutable.gregs.r16[2]) {
-        reg_json(sendstr, "CX",serv->mutable.gregs.r16[2],student->mutable.gregs.r16[2]);
+        resource_json(sendstr, "CX",serv->mutable.gregs.r16[2],student->mutable.gregs.r16[2]);
         fprintf(stderr, "CXが異なります");
         equals = 1;
     }
     if (student->mutable.gregs.r16[3] != serv->mutable.gregs.r16[3]) {
-        reg_json(sendstr, "DX",serv->mutable.gregs.r16[3],student->mutable.gregs.r16[3]);
+        resource_json(sendstr, "DX",serv->mutable.gregs.r16[3],student->mutable.gregs.r16[3]);
         fprintf(stderr, "DXが異なります");
         equals = 1;
     }
     if(student->mutable.regs[0] != serv->mutable.regs[0]) {
-        reg_json(sendstr, "SP", serv->mutable.regs[0], student->mutable.regs[0]);
+        resource_json(sendstr, "SP", serv->mutable.regs[0], student->mutable.regs[0]);
         fprintf(stderr, "SPが異なります");
         equals = 1;
     }
     if (student->mutable.regs[1] != serv->mutable.regs[1]) {
-        reg_json(sendstr, "BP", serv->mutable.regs[1], student->mutable.regs[1]);
+        resource_json(sendstr, "BP", serv->mutable.regs[1], student->mutable.regs[1]);
         fprintf(stderr, "BPが異なります");
         equals = 1;
     }
     if (student->mutable.regs[2] != serv->mutable.regs[2]) {
-        reg_json(sendstr, "SI", serv->mutable.regs[2], student->mutable.regs[2]);
+        resource_json(sendstr, "SI", serv->mutable.regs[2], student->mutable.regs[2]);
         fprintf(stderr, "SIが異なります");
         equals = 1;
     }
     if (student->mutable.regs[3] != serv->mutable.regs[3]) {
-        reg_json(sendstr, "DI", serv->mutable.regs[3], student->mutable.regs[3]);
+        resource_json(sendstr, "DI", serv->mutable.regs[3], student->mutable.regs[3]);
         fprintf(stderr, "DIが異なります");
         equals = 1;
     }
     if (student->mutable.ip!= serv->mutable.ip) {
-        reg_json(sendstr, "IP", serv->mutable.ip, student->mutable.ip);
+        resource_json(sendstr, "IP", serv->mutable.ip, student->mutable.ip);
         fprintf(stderr, "IPが異なります");
         equals = 1;
     }
@@ -63,13 +63,13 @@ int compare_vm(char* sendstr,VM* student,VM* serv){
         unsigned short cflg = student->mutable.flags;
         unsigned short sflg = serv->mutable.flags;
         if (( (cflg >> OF_BIT) & 1 ) != ( (sflg >> OF_BIT) & 1) )
-            flg_json(sendstr, "OF", ((sflg >> OF_BIT) & 1 ), ((cflg >> OF_BIT) & 1));
+            resource_json(sendstr, "OF", ((sflg >> OF_BIT) & 1 ), ((cflg >> OF_BIT) & 1));
         if (( (cflg >> ZF_BIT) & 1 ) != ( (sflg >> ZF_BIT) & 1) )
-            flg_json(sendstr, "ZF", ((sflg >> ZF_BIT) & 1 ), ((cflg >> ZF_BIT) & 1));
+            resource_json(sendstr, "ZF", ((sflg >> ZF_BIT) & 1 ), ((cflg >> ZF_BIT) & 1));
         if (( (cflg >> SF_BIT) & 1 ) != ( (sflg >> SF_BIT) & 1) )
-            flg_json(sendstr, "SF", ((sflg >> SF_BIT) & 1 ), ((cflg >> SF_BIT) & 1));
+            resource_json(sendstr, "SF", ((sflg >> SF_BIT) & 1 ), ((cflg >> SF_BIT) & 1));
         if (( (cflg >> CF_BIT) & 1 ) != ( (sflg >> CF_BIT) & 1) )
-            flg_json(sendstr, "CF", ((sflg >> CF_BIT) & 1 ), ((cflg >> CF_BIT) & 1));
+            resource_json(sendstr, "CF", ((sflg >> CF_BIT) & 1 ), ((cflg >> CF_BIT) & 1));
         equals = 1;
     }
     if (memcmp(student->mutable.data_mem, serv->mutable.data_mem, 0x10000) != 0) {
@@ -88,10 +88,10 @@ int compare_vm(char* sendstr,VM* student,VM* serv){
     if (equals == 1) {
         for (int i = 0; i < 0x10000; i++) {
             if (student->mutable.data_mem[i] != serv->mutable.data_mem[i]) {
-                char str[256] = "";
-                dmem_json(sendstr, i,serv->mutable.data_mem[i] ,student->mutable.data_mem[i] );
+                char str[64] = "";
+                sprintf(str, "memory[%04x]", i); 
+                resource_json(sendstr, str, serv->mutable.data_mem[i] ,student->mutable.data_mem[i] );
                 //fprintf(stderr, "datamem[%04x]{server:%02x,client:%02x}\n", i, serv->mutable.data_mem[i], student->mutable.data_mem[i]);
-                strcat(sendstr, str);
             }
         }
     }
@@ -130,12 +130,11 @@ int recv_all(int fd, void *ptr, int len) {
 int compare(int fd, VM* serv_vm, char* opcode){
     VM recv_vm = {0};
     recv_all(fd, &recv_vm, sizeof(recv_vm.mutable));
-    char sendstr[0x100000] = {};
-    
+    char sendstr[0x100000] = {}; 
     //json
     strcat(sendstr,"{");
     instruction_json(sendstr, opcode);
-    strcat(sendstr,",\"resource\":{");
+    strcat(sendstr,",\"resource\":[");
     //json
     
     if (compare_vm(sendstr,&recv_vm, serv_vm)) {
@@ -146,8 +145,8 @@ int compare(int fd, VM* serv_vm, char* opcode){
         send_all(fd,&judge_result,1);
         
         //json
+        sendstr[strlen(sendstr) - 2] = ']';
         sendstr[strlen(sendstr) - 1] = '}';
-        strcat(sendstr,"}");
         //json
         
         fprintf(stderr,"%s", sendstr);
@@ -167,7 +166,7 @@ int compare(int fd, VM* serv_vm, char* opcode){
          //debug_hw(recvhw);
         */
         close(fd);
-        exit(1);
+        exit(0);
     }else{
         send_all(fd, "", 1);
     }
