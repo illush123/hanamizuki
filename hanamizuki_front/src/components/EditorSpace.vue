@@ -13,7 +13,8 @@
               </div>
             </b-col>
           </b-row>
-          <div class="editor pt-3">
+          <div class="editor">
+            <div id="editor-space" class="editor" style="{height: 100%}"></div>
             <!-- editor? -->
           </div>
           <div class="editor-space-submit-button pt-4">
@@ -26,11 +27,28 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import * as monaco from 'monaco-editor';
+import IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor;
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component
 export default class EditorSpace extends Vue {
+  mounted() {
+    const target = document.getElementById('editor-space');
+    if (target !== null) {
+      const editor: IStandaloneCodeEditor = monaco.editor.create(target, {
+        language: 'c',
+
+        minimap: {
+          enabled: false,
+        },
+        roundedSelection: false,
+        //scrollBeyondLastLine: false,
+        readOnly: false,
+      });
+    }
+  }
 }
 
 </script>
@@ -72,6 +90,7 @@ export default class EditorSpace extends Vue {
       }
 
       .editor {
+        text-align: left;
         height: 580px;
         border: solid 1px $h-black;
         background-color: white;
