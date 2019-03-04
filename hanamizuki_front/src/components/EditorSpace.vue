@@ -14,8 +14,8 @@
             </b-col>
           </b-row>
           <div class="editor">
-            <div id="editor-space" class="editor" style="{height: 100%}"></div>
             <!-- editor? -->
+            <div id="editor-space" class="editor" style="{height: 100%}"></div>
           </div>
           <div class="editor-space-submit-button pt-4">
             <b-button class="submit-button" size="lg">検証スタート</b-button>
@@ -34,19 +34,20 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component
 export default class EditorSpace extends Vue {
-  editorData = '';
+  private editorData = '';
 
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch('DataStore/uploadUserProgram');
     const target = document.getElementById('editor-space');
+    console.log(this.$store.state.DataStore.test);
     if (target !== null) {
       const editor: IStandaloneCodeEditor = monaco.editor.create(target, {
+        value: this.$store.state.DataStore.test.status,
         language: 'c',
-
         minimap: {
           enabled: false,
         },
         roundedSelection: false,
-        //scrollBeyondLastLine: false,
         readOnly: false,
       });
     }
