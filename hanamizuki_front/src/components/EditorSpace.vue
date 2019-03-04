@@ -2,14 +2,14 @@
     <div class="editor-space-container">
       <b-container>
         <div class="editor-space-header">
-          <div class="editor-space-title pt-1 pb-1">VM&nbspCode</div>
+          <div class="editor-space-title pt-1 pb-1">VM&nbsp;Code</div>
         </div>
         <div class="editor-space-body pl-4 pr-4">
           <b-row>
             <b-col cols="9"></b-col>
             <b-col cols="3">
               <div class="editor-space-tools pt-3 pb-2">
-                <b-button class="folder-button">&nbsp&nbsp&nbsp&nbspフォルダを開く</b-button>
+                <b-button class="folder-button">&nbsp;&nbsp;&nbsp;&nbsp;フォルダを開く</b-button>
               </div>
             </b-col>
           </b-row>
@@ -34,6 +34,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component
 export default class EditorSpace extends Vue {
+  editorData = '';
+
   mounted() {
     const target = document.getElementById('editor-space');
     if (target !== null) {
@@ -49,6 +51,8 @@ export default class EditorSpace extends Vue {
       });
     }
   }
+
+  // monaco-editorはeditor.getValue()で内容を取得できそう。
 }
 
 </script>
