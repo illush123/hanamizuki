@@ -2,23 +2,23 @@
     <div class="editor-space-container">
       <b-container>
         <div class="editor-space-header">
-          <div class="editor-space-title pt-1 pb-1">VM&nbspCode</div>
+          <div class="editor-space-title pt-1 pb-1">VM&nbsp;Code</div>
         </div>
         <div class="editor-space-body pl-4 pr-4">
           <b-row>
             <b-col cols="9"></b-col>
             <b-col cols="3">
               <div class="editor-space-tools pt-3 pb-2">
-                <b-button class="folder-button">&nbsp&nbsp&nbsp&nbspフォルダを開く</b-button>
+                <b-button class="folder-button">&nbsp;&nbsp;&nbsp;&nbsp;フォルダを開く</b-button>
               </div>
             </b-col>
           </b-row>
           <div class="editor">
-            <div id="editor-space" class="editor" style="{height: 100%}"></div>
             <!-- editor? -->
+            <div id="editorspace" class="editor" style="{height: 100%}"></div>
           </div>
           <div class="editor-space-submit-button pt-4">
-            <b-button class="submit-button" size="lg">検証スタート</b-button>
+            <b-button class="submit-button" size="lg" @click="clickSubmitButton()">検証スタート</b-button>
           </div>
         </div>
       </b-container>
@@ -34,21 +34,35 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component
 export default class EditorSpace extends Vue {
-  mounted() {
-    const target = document.getElementById('editor-space');
+  private editorData = '';
+  private editorBody: any = '';
+
+  async mounted() {
+    // test
+    await this.$store.dispatch('DataStore/test');
+    const target = document.getElementById('editorspace');
     if (target !== null) {
       const editor: IStandaloneCodeEditor = monaco.editor.create(target, {
+        value: this.$store.state.DataStore.test.status,
         language: 'c',
-
         minimap: {
           enabled: false,
         },
         roundedSelection: false,
-        //scrollBeyondLastLine: false,
         readOnly: false,
       });
+
+      this.editorBody = target;
     }
   }
+
+  // ボタンを押すとDataStore::state.userProgramにデータが保存される(バグあり)
+  clickSubmitButton() {
+    console.log(this.editorBody.getValue());
+    this.$store.dispatch('DataStore/uploadUserProgram', this.editorBody.getValue());
+  }
+
+  // monaco-editorはeditor.getValue()で内容を取得できそう。
 }
 
 </script>

@@ -5,7 +5,7 @@
         <b-row>
           <b-col cols="5" class="pt-1 pb-1 pl-5">
             <span class="lesson-const">Lesson</span>
-            <span class="lesson-number">&nbsp&nbsp{{lessonNumber}}</span>
+            <span class="lesson-number">&nbsp;&nbsp;{{lessonNumber}}</span>
           </b-col>
           <b-col cols="7" class="pt-1 pb-1">
             <span class="lesson-title">{{lessonTitle}}</span>
