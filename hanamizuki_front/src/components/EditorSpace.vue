@@ -15,10 +15,10 @@
           </b-row>
           <div class="editor">
             <!-- editor? -->
-            <div id="editor-space" class="editor" style="{height: 100%}"></div>
+            <div id="editorspace" class="editor" style="{height: 100%}"></div>
           </div>
           <div class="editor-space-submit-button pt-4">
-            <b-button class="submit-button" size="lg">検証スタート</b-button>
+            <b-button class="submit-button" size="lg" @click="clickSubmitButton()">検証スタート</b-button>
           </div>
         </div>
       </b-container>
@@ -35,11 +35,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 @Component
 export default class EditorSpace extends Vue {
   private editorData = '';
+  private editorBody: any = '';
 
   async mounted() {
-    await this.$store.dispatch('DataStore/uploadUserProgram');
-    const target = document.getElementById('editor-space');
-    console.log(this.$store.state.DataStore.test);
+    // test
+    await this.$store.dispatch('DataStore/test');
+    const target = document.getElementById('editorspace');
     if (target !== null) {
       const editor: IStandaloneCodeEditor = monaco.editor.create(target, {
         value: this.$store.state.DataStore.test.status,
@@ -50,7 +51,15 @@ export default class EditorSpace extends Vue {
         roundedSelection: false,
         readOnly: false,
       });
+
+      this.editorBody = target;
     }
+  }
+
+  // ボタンを押すとDataStore::state.userProgramにデータが保存される(バグあり)
+  clickSubmitButton() {
+    console.log(this.editorBody.getValue());
+    this.$store.dispatch('DataStore/uploadUserProgram', this.editorBody.getValue());
   }
 
   // monaco-editorはeditor.getValue()で内容を取得できそう。
