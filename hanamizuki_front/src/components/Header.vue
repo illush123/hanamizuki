@@ -1,19 +1,23 @@
 <template>
   <header>
-    <div class="header-image-wrapper">
-      <img src="/path/to/image" class="header-image_src">
-    </div>
-    <div class="header-text-wrapper">
-      <div class="header-text-lesson_wrapper">
-        <span class="header-text-lesson">レッスン一覧</span>
+    <b-container class="b-header-container">
+      <div class="header-image-wrapper">
+        <img src="/path/to/image" class="header-image_src">
       </div>
-      <span class="header-text-lesson_name">{{lessonTitle}}</span>
-    </div>
+      <div class="header-text-wrapper">
+        <div class="header-text-lesson_wrapper">
+          <span class="header-text-lesson">レッスン一覧</span>
+        </div>
+        <span class="header-text-lesson_name">{{lessonTitle}}</span>
+      </div>
+    </b-container>
   </header>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component
 export default class Header extends Vue {
@@ -32,7 +36,7 @@ export default class Header extends Vue {
     }
 
     .header-text-wrapper {
-      width: 80%;
+      width: 100%;
       // height: auto;
       text-align: left;
       border-bottom: 3px solid #a9eda9;
