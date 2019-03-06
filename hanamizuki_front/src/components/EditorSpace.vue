@@ -35,15 +35,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 @Component
 export default class EditorSpace extends Vue {
   private editorData = '';
-  private editorBody: any = '';
-
+  public editor : IStandaloneCodeEditor | null = null;
+  
   async mounted() {
     // test
-    await this.$store.dispatch('DataStore/test');
     const target = document.getElementById('editorspace');
     if (target !== null) {
-      const editor: IStandaloneCodeEditor = monaco.editor.create(target, {
-        value: this.$store.state.DataStore.test.status,
+      this.editor = monaco.editor.create(target, {
+        value: this.editorData,
         language: 'c',
         minimap: {
           enabled: false,
@@ -51,18 +50,16 @@ export default class EditorSpace extends Vue {
         roundedSelection: false,
         readOnly: false,
       });
-
-      this.editorBody = target;
     }
   }
 
   // ボタンを押すとDataStore::state.userProgramにデータが保存される(バグあり)
-  clickSubmitButton() {
-    console.log(this.editorBody.getValue());
-    this.$store.dispatch('DataStore/uploadUserProgram', this.editorBody.getValue());
+  private clickSubmitButton(): void {
+    if (this.editor !== null) {
+      this.editorData = this.editor.getValue();
+      this.$store.dispatch('DataStore/uploadUserProgram', {'code': this.editorData});
+    }
   }
-
-  // monaco-editorはeditor.getValue()で内容を取得できそう。
 }
 
 </script>

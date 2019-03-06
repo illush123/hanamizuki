@@ -17,31 +17,26 @@ const mutations = {
   /* payload = {output: 'output...'} */
   setOutput(state: any, payload: any): any {
     state.code = payload.output;
-  },
-
-  /* codeforceのApi叩いてテスト payload = {data: {...}}*/
-  setTest(state: any, payload: any): any {
-    state.test = payload.data;
   }
 };
 
 const actions = {
-  // test
-  async test(context: any) {
-    //context.commit('setUserProgram', {'code': program});
-    await axios
-      .get('https://codeforces.com/api/user.info?handles=ryo1126')
-      .then(response => {
-        if (response.data.status === 'OK') {
-          context.commit('setTest', {'data': response.data});
-        }
-      });
-  },
-
   // stateのuserprogramに実行するコードを保存
   uploadUserProgram(context: any, payload: object): void {
     context.commit('setUserProgram', payload);
-  }
+    console.log(state.userProgram);
+    
+    /* サーバにuserが書いたコードをポスト */
+    axios.post('/api/v1/vmiss/upload', {
+      'code': state.userProgram
+    })
+    .then ((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  },
 };
 
 export default {

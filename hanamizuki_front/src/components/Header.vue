@@ -27,6 +27,7 @@ export default class Header extends Vue {
 </script>
 
 <style scoped lang="scss">
+  @import "../assets/style/_variables";
 
   header {
 
@@ -39,7 +40,7 @@ export default class Header extends Vue {
       width: 100%;
       // height: auto;
       text-align: left;
-      border-bottom: 3px solid #a9eda9;
+      border-bottom: 3px solid $header-border;
       padding-bottom: 10px;
 
       .header-text-lesson_wrapper {
@@ -49,8 +50,8 @@ export default class Header extends Vue {
         padding-right: 10px;
 
         .header-text-lesson {
-          background-color: #B8E994;
-          border: solid 5px #B8E994;
+          background-color: $header-text-wrapper;
+          border: solid 5px $header-text-wrapper;
           border-radius: 0.5em;
         }
       }
